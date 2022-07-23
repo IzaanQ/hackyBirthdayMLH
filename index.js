@@ -72,16 +72,25 @@ function animate() {
     player.update()
     platform.draw()
 
-    if (keys.right.pressed) {
+    if (keys.right.pressed && player.position.x < 400) {
         player.velocity.x = 5
     }
 
-    else if (keys.left.pressed) {
+    else if (keys.left.pressed && player.position.x > 100) {
         player.velocity.x = -5
     }
 
     else { 
         player.velocity.x = 0
+
+        if (keys.right.pressed) {
+            platform.position.x -= 5
+        }
+
+        else if (keys.left.pressed) { 
+            platform.position.x += 5
+        }    
+
     }
 
     if (player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width) {
